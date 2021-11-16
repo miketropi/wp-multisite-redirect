@@ -10,7 +10,7 @@ function wmr_enqueue_scripts() {
 
   $clientIP = wmr_get_client_ip();
   
-  wp_localize_script('wmr-script', 'PHP_DATA', [
+  wp_localize_script('wmr-script', 'WMR_PHP_DATA', [
     'ajax_url' => admin_url('admin-ajax.php'),
     'blog_id' => get_current_blog_id(),
     'my_location' => wmr_get_location_by_ip($clientIP),

@@ -60,7 +60,7 @@ const ExpiredStorage = require('expired-storage');
       let $input = $(this);
       let cc = $input.data('site-cc');
 
-      if(cc.split(',').includes(PHP_DATA?.my_location?.countryCode)) {
+      if(cc.split(',').includes(WMR_PHP_DATA?.my_location?.countryCode)) {
         $inputSelect = $input;
         return false;
       }
@@ -74,7 +74,7 @@ const ExpiredStorage = require('expired-storage');
   }
 
   const Ready = () => {
-    if(!w.wmr_site_id || PHP_DATA.blog_id != w.wmr_site_id) {
+    if(!w.wmr_site_id || WMR_PHP_DATA.blog_id != w.wmr_site_id) {
       popupDisplay(true);
     }
 
