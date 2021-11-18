@@ -93,6 +93,21 @@ const ExpiredStorage = require('expired-storage');
     }
   }
 
+  const getHashValue = (hash, key) => {
+    var matches = hash.match(new RegExp(key+'=([^&]*)'));
+    return matches ? matches[1] : null;
+  }
+  
+  const switchSiteForce = (hash) => {
+    let siteID = getHashValue(hash, 'wmr_id');
+    let s = WMR_PHP_DATA.site_options.find(site => {
+      return site.site == siteID
+    })
+
+    expiredStorage.setItem('wmr_site_id', s.site, __expireTime);
+    w.location.href = s.site_url;
+  }
+
   const Ready = () => {
     if(!w.wmr_site_id || WMR_PHP_DATA.blog_id != w.wmr_site_id) {
       popupDisplay(true);
@@ -103,6 +118,10 @@ const ExpiredStorage = require('expired-storage');
     goSite();
 
     autoSelect();
+    // switchSiteForce();
+    w.addEventListener('hashchange', () => {
+      switchSiteForce(w.location.hash)
+    });
 
     $('input[name=wmr_site_id]:checked').trigger('change');
   }
