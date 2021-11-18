@@ -1,3 +1,6 @@
+$primary-color: #34af33 !default;
+$secondary-color: #fafff9 !default;
+
 .wmr-popup-select-site-redirect {
   position: fixed;
   left: 0;
@@ -43,6 +46,38 @@
     margin-bottom: 1em;
   }
 
+  &__desc {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: solid 1px $primary-color;
+    border-radius: 3px;
+    background: $secondary-color;
+  }
+
+  &__desc-icon {
+    width: 28px;
+    height: 28px;
+    padding: 6px;
+    border-radius: 20px;
+    background: $primary-color;
+    min-width: 28px;
+    margin-right: 10px;
+    line-height: 0;
+    box-sizing: border-box;
+
+    svg {
+      width: 100%;
+      fill: white;
+    }
+  }
+
+  &__desc-entry {
+    font-size: 14px;
+    line-height: 1.5em;
+    color: black;
+  }
+
   .wmr-go-button {
     display: block;
     font-size: 16px;
@@ -59,7 +94,7 @@
     -webkit-transition: .3s ease;
 
     &.__active {
-      background: #34af33;
+      background: $primary-color;
       text-shadow: none;
       pointer-events: auto;
     }
@@ -77,6 +112,11 @@
 
     .__site-option {
       width: calc(50% - 10px);
+
+      &:not(.__active) {
+        opacity: .4;
+        pointer-events: none;
+      }
 
       label {
         cursor: pointer;
@@ -97,7 +137,7 @@
           top: 0;
           z-index: 3;
           padding: 1px 6px;
-          background: #34af33;
+          background: $primary-color;
           border-radius: 3px 0 3px 0;
           color: white;
           font-size: 10px;
@@ -129,8 +169,8 @@
         &:checked {
 
           + .__option-entry {
-            border-color: #34af33;
-            background: #fafff9;
+            border-color: $primary-color;
+            background: $secondary-color;
 
             &:after {
               visibility: visible;

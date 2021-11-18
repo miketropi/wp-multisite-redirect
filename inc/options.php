@@ -49,7 +49,17 @@ function wmr_network_register_options() {
                 'value' => true
               ]
             ]),
+          Field::make('separator', '__separator_1', __('Message', 'wmr')),
+          Field::make('text', 'popup_title', __('Popup Title', 'wmr'))
+            ->set_help_text(__('Type your popup title', 'wmr'))
+            ->set_default_value(__('Select store', 'wmr')),
+          Field::make('textarea', 'popup_desc', __('Popup Description', 'wmr'))
+            ->set_help_text(__('Type your popup description.')),
+          Field::make('text', 'go_button_text', __('Button Text', 'wmr'))
+            ->set_help_text(__('Type your button text', 'wmr'))
+            ->set_default_value(__('Go store', 'wmr'))
         ])
+        ->set_collapsed(true)
         ->set_header_template('
         <% let __wpmsites = '. wp_json_encode(wmr_site_options()) .' %>
         <% if (site) { %>

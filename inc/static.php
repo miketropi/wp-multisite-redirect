@@ -14,6 +14,7 @@ function wmr_enqueue_scripts() {
     'ajax_url' => admin_url('admin-ajax.php'),
     'blog_id' => get_current_blog_id(),
     'my_location' => wmr_get_location_by_ip($clientIP),
+    'site_options' => carbon_get_network_option(SITE_ID_CURRENT_SITE, 'wmr_sites_redirect_rule', 'carbon_fields_container_wmr_network_container'),
     'lang' => []
   ]);
 }

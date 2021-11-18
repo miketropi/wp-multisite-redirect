@@ -17,7 +17,11 @@ const ExpiredStorage = require('expired-storage');
   const updateSiteOption = () => {
     $('input[name=wmr_site_id]').on('change', function(e) {
       let value = this.value;
-      let url = $(`input[name=wmr_site_id][value=${value}]`).data('site-url');
+      let $input = $(`input[name=wmr_site_id][value=${value}]`);
+      let url = $input.data('site-url');
+      let popupTitle = $input.data('popup-title');
+      let popupDesc = $input.data('popup-desc');
+      let popupButtonText = $input.data('popup-button-text');
       
       w.wmr_redirect_url = url;
       w.wmr_site_id = value;
@@ -27,7 +31,21 @@ const ExpiredStorage = require('expired-storage');
       } else {
         $('.wmr-go-button').removeClass('__active');
       }
+
+      updatePopupContent(popupTitle, popupDesc, popupButtonText);
     })
+  }
+
+  const updatePopupContent = (title, description, buttonText) => {
+    $('.wmr-popup-select-site-redirect__title').html(title);
+    $('.wmr-go-button').html(buttonText);
+
+    if(!description) {
+      $('.wmr-popup-select-site-redirect__desc').stop(true, true).slideUp(0);
+    } else {
+      $('.wmr-popup-select-site-redirect__desc-entry').html(description);
+      $('.wmr-popup-select-site-redirect__desc').stop(true, true).slideDown('slow');
+    }
   }
 
   const goSite = () => {
@@ -68,8 +86,10 @@ const ExpiredStorage = require('expired-storage');
 
     if($inputSelect) {
       $inputSelect.prop('checked', true);
+      $inputSelect.parents('.__site-option').addClass('__active');
     } else {
       $('input[name=wmr_site_id][data-site-cc="*"]').prop('checked', true);
+      $('input[name=wmr_site_id][data-site-cc="*"]').parents('.__site-option').addClass('__active');
     }
   }
 
@@ -79,7 +99,7 @@ const ExpiredStorage = require('expired-storage');
     }
 
     closePopup();
-    updateSiteOption()
+    updateSiteOption();
     goSite();
 
     autoSelect();
