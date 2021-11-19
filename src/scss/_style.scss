@@ -113,10 +113,10 @@ $secondary-color: #fafff9 !default;
     .__site-option {
       width: calc(50% - 10px);
 
-      &:not(.__active) {
-        opacity: .4;
-        pointer-events: none;
-      }
+      // &:not(.__active) {
+      //   opacity: .4;
+      //   pointer-events: none;
+      // } 
 
       label {
         cursor: pointer;
