@@ -1,6 +1,6 @@
 /**
- * Main javascript 
- * 
+ * Main javascript
+ *
  */
 
 import './scss/main.scss';
@@ -9,7 +9,7 @@ const ExpiredStorage = require('expired-storage');
 ;((w, $) => {
   'use strict';
   const expiredStorage = new ExpiredStorage();
-  const __expireTime = (60 * 60) * 24; // 1 day 
+  const __expireTime = (60 * 60) * 24; // 1 day
 
   w.wmr_redirect_url = null;
   w.wmr_site_id = expiredStorage.getItem('wmr_site_id');
@@ -22,7 +22,7 @@ const ExpiredStorage = require('expired-storage');
       let popupTitle = $input.data('popup-title');
       let popupDesc = $input.data('popup-desc');
       let popupButtonText = $input.data('popup-button-text');
-      
+
       w.wmr_redirect_url = url;
       w.wmr_site_id = value;
 
@@ -97,7 +97,7 @@ const ExpiredStorage = require('expired-storage');
     var matches = hash.match(new RegExp(key+'=([^&]*)'));
     return matches ? matches[1] : null;
   }
-  
+
   const switchSiteForce = (hash) => {
     let siteID = getHashValue(hash, 'wmr_id');
     let s = WMR_PHP_DATA.site_options.find(site => {
@@ -108,9 +108,29 @@ const ExpiredStorage = require('expired-storage');
     w.location.href = s.site_url;
   }
 
+
+
+  const isCheckLocationCurrent = () => {
+    if(WMR_PHP_DATA.site_code != ''){
+      let countryCodeSite = WMR_PHP_DATA.site_code == 'uk' ? WMR_PHP_DATA.allowed_countries_uk : WMR_PHP_DATA.allowed_countries_eu;
+      let countryCodeCurrent = WMR_PHP_DATA.my_location.countryCode;
+      let isLocation = false;
+      Object.keys(countryCodeSite).forEach(function(key) {
+         if(countryCodeSite[key] == countryCodeCurrent){
+           isLocation = true;
+         }
+      });
+      if(isLocation) return true;
+    }
+    return false;
+  }
+
   const Ready = () => {
+
     if(!w.wmr_site_id || WMR_PHP_DATA.blog_id != w.wmr_site_id) {
-      popupDisplay(true);
+      if(!isCheckLocationCurrent()){
+         popupDisplay(true);
+      }
     }
 
     closePopup();

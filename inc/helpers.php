@@ -1,13 +1,13 @@
-<?php 
+<?php
 /**
- * Helpers 
+ * Helpers
  */
 
 function wmr_get_all_sites() {
   $result = [];
   $sites = get_sites(['public' => 1]);
   if(count($sites) == 0) return $result;
-  
+
   foreach($sites as $index => $site) {
     $result[$site->blog_id] = $site; // site_url($site->path);
   }
@@ -65,3 +65,12 @@ add_action('init', function() {
   // echo site_url("/us-store/");
   // echo '</pre>';
 });
+
+//get site code
+function wmr_get_site_code(){
+  $HTTP_HOST = $_SERVER['HTTP_HOST'];
+  $https = $_SERVER['HTTPS'] == 'on' ? 'https://':'http://';
+  $host_name = $https.$HTTP_HOST.'/';
+  $site_url = site_url();
+  return str_replace($host_name,'',$site_url);
+}
