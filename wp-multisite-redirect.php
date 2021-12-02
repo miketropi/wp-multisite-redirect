@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Plugin Name:       		WordPress Multisite Redirect
  * Description:       		...
@@ -14,15 +14,15 @@
  */
 
 /**
- * load vendor 
+ * load vendor
  */
 require(__DIR__ . '/vendor/autoload.php');
 
 {
   /**
-   * Define 
+   * Define
    */
-  define('WMR_VERSION', '1.0.0');
+  define('WMR_VERSION', '1.0.1');
   define('WMR_URI', plugin_dir_url(__FILE__));
   define('WMR_DIR', plugin_dir_path(__FILE__));
 }
@@ -45,6 +45,6 @@ require(__DIR__ . '/vendor/autoload.php');
   function wmr_boot() {
     \Carbon_Fields\Carbon_Fields::boot();
   }
-  
+
   add_action('after_setup_theme', 'wmr_boot');
 }
