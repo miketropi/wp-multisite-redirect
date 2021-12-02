@@ -70,7 +70,10 @@ add_action('init', function() {
 function wmr_get_site_code(){
   $HTTP_HOST = $_SERVER['HTTP_HOST'];
   $https = $_SERVER['HTTPS'] == 'on' ? 'https://':'http://';
-  $host_name = $https.$HTTP_HOST.'/';
   $site_url = site_url();
-  return str_replace($host_name,'',$site_url);
+
+  $site_code = str_replace($https.$HTTP_HOST.'/','',$site_url);
+  $site_code = str_replace($https.$HTTP_HOST,'',$site_code);
+
+  return $site_code;
 }

@@ -126,7 +126,6 @@ const ExpiredStorage = require('expired-storage');
   }
 
   const Ready = () => {
-
     if(!w.wmr_site_id || WMR_PHP_DATA.blog_id != w.wmr_site_id) {
       if(!isCheckLocationCurrent()){
          popupDisplay(true);
