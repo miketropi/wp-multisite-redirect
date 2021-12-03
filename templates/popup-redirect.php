@@ -1,7 +1,7 @@
-<?php 
+<?php
 /**
- * Popup redirect template 
- * 
+ * Popup redirect template
+ *
  */
 
 if(count($sites) == 0) return;
@@ -16,26 +16,31 @@ if(count($sites) == 0) return;
       <div class="wmr-popup-select-site-redirect__desc-entry"></div>
     </div>
     <!-- <a href="javascript:" class="__close"><?php _e('× Close', 'wmr') ?></a> -->
+    <?php
+      $slug_uri = $_SERVER['REQUEST_URI'];
+      $slug_uri = str_replace('/uk','',$slug_uri);
+      $slug_uri = str_replace('/eu','',$slug_uri);
+     ?>
     <div class="site-options">
-      <?php foreach($sites as $index => $site) {?> 
+      <?php foreach($sites as $index => $site) {?>
       <div class="__site-option">
         <label>
-          <input 
-            type="radio" 
-            name="wmr_site_id" 
-            value="<?php echo $site['site']; ?>" 
-            data-site-url="<?php echo get_site_url($site['site']); ?>"
-            data-site-cc="<?php echo implode(',', explode(PHP_EOL, $site['country_code'])); ?>" 
-            data-popup-title="<?php echo $site['popup_title']; ?>" 
-            data-popup-desc="<?php echo $site['popup_desc']; ?>" 
-            data-popup-button-text="<?php echo $site['go_button_text']; ?>" 
+          <input
+            type="radio"
+            name="wmr_site_id"
+            value="<?php echo $site['site']; ?>"
+            data-site-url="<?php echo get_site_url($site['site']).$slug_uri; ?>"
+            data-site-cc="<?php echo implode(',', explode(PHP_EOL, $site['country_code'])); ?>"
+            data-popup-title="<?php echo $site['popup_title']; ?>"
+            data-popup-desc="<?php echo $site['popup_desc']; ?>"
+            data-popup-button-text="<?php echo $site['go_button_text']; ?>"
             />
           <div class="__option-entry">
             <img src="<?php echo $site['site_logo'] ?>" alt="#<?php echo $site['title'] ?>">
             <h4><?php echo $site['title'] ?></h4>
           </div>
         </label>
-      </div>  
+      </div>
       <?php } ?>
     </div>
     <a class="wmr-go-button" href="javascript:" ><?php _e('Go store', 'wmr') ?></a>
